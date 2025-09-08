@@ -28,7 +28,18 @@
 <main>		
     <input type="text" id="searchBar" placeholder="Type the song name, number or learn">
     <button id="clearSearch"><i class="fa-solid fa-xmark"></i></button>
-	<button id="XmasButton"><i class="fa-solid fa-sleigh"></i></button>
+	<!-- Toggle button -->
+<button id="toggleCategories" title="Categories">
+  <i class="fa-solid fa-tags"></i>
+</button>
+
+<!-- Category button container -->
+<div id="categoryButtons" style="display:none; margin-top:10px;">
+  <button id="ShowFavs" title="Favourites"><i class="fa-solid fa-star"></i></button>
+  <button id="Dice" title="Random"><i class="fa-solid fa-dice"></i></button>
+  <button id="XmasButton"><i class="fa-solid fa-sleigh"></i></button>
+  <br><br>
+</div>
 
 
     <div id="noResults">No song found <i class="fa-regular fa-face-sad-tear"></i>, please check your spelling</div>
@@ -2019,27 +2030,32 @@
    <script>
 $(document).ready(function () {
     // Focus on search bar when page loads
-    $('#searchBar').focus();
+$('#searchBar').focus();
 
-    // Search functionality
-    $('#searchBar').on('keyup', function () {
-        var value = $(this).val().toLowerCase();
-        var visibleCards = 0;
-		
-		 // If "pick" is typed, pick a random song number from 1 to 250
-        if (value === "pick") {
-            var randomNumber = Math.floor(Math.random() * 250) + 1;
-            value = randomNumber.toString(); // Search by random number
-        }
+// Search functionality
+$('#searchBar').on('keyup', function () {
+    $('#noFavourites').hide();
+    var value = $(this).val().toLowerCase();
+    var visibleCards = 0;
 
-        $('.card').each(function () {
-            var match = $(this).data('name').toLowerCase().includes(value);
-            $(this).toggle(match);
-            if (match) visibleCards++;
-        });
+    // If "pick" is typed, pick a random song number from 1 to 250
+    if (value === "pick") {
+        var randomNumber = Math.floor(Math.random() * 250) + 1;
+        value = randomNumber.toString() + "."; // Search by random number
+    }
 
-        $('#noResults').toggle(visibleCards === 0);
+    // Decide whether to use startsWith or includes
+    var useStartsWith = /^[0-9]/.test(value); // true if value begins with a digit
+
+    $('.card').each(function () {
+        var name = $(this).data('name').toLowerCase();
+        var match = useStartsWith ? name.startsWith(value) : name.includes(value);
+        $(this).toggle(match);
+        if (match) visibleCards++;
     });
+
+    $('#noResults').toggle(visibleCards === 0);
+});
 	
 
     // Hide keyboard after 3s of inactivity
@@ -2074,25 +2090,112 @@ $(document).ready(function () {
 
     // Clear search bar when clicking clear button
     $('#clearSearch').click(function () {
-        location.reload();
+        $('#searchBar').val("").trigger('keyup');
+        $('#noFavourites').hide();
+        $('#categoryButtons').hide();
+        $('#searchBar').focus();
+        clearTimeout(typingTimer);
+
     });
 
-$('#XmasButton').click(function () {
-    $('#searchBar').val("xmas").trigger('keyup');
+    $('#Dice').click(function () {
+        $('#searchBar').val("pick").trigger('keyup');
+    });
+    $('#XmasButton').click(function () {
+        $('#searchBar').val("xmas").trigger('keyup');
+    });
+
+
+$('#toggleCategories').click(function () {
+    const container = $('#categoryButtons');
+    if (container.is(':visible')) {
+        container.hide();
+        $(this).html('<i class="fa-solid fa-tags"></i>');
+    } else {
+        container.show();
+        $(this).html('<i class="fa-solid fa-tags"></i>');
+    }
 });
+
 
 
     // Show/hide back-to-top button
     $(window).scroll(function () {
         $('#backToTop').toggle($(this).scrollTop() > 100);
+        $('#searchBar').blur();
     });
 
     // Scroll to top when button is clicked
     $('#backToTop').click(function () {
         $('html, body').animate({ scrollTop: 0 }, 'fast');
+       // $('#searchBar').focus();
     });
 });
-  </script>
+
+
+// Load favourites from localStorage
+let favourites = JSON.parse(localStorage.getItem('favourites')) || [];
+
+
+$('#ShowFavs').click(function () {
+  if (favourites.length === 0) {
+    // hide all cards
+    $('.card').hide();
+    // show message
+    $('#noFavourites').show();
+  } else {
+    $('.card').each(function () {
+      const title = $(this).data('name');
+      $(this).toggle(favourites.includes(title));
+    });
+    // hide message
+    $('#noFavourites').hide();
+  }
+});
+
+$('#ShowAll').click(function () {
+  $('.card').show();
+  $('#noFavourites').hide();
+});
+
+
+
+
+
+
+// Initialize UI state
+$('.card').each(function () {
+  const title = $(this).data('name');
+  if (favourites.includes(title)) {
+    $(this).find('.fav-btn').addClass('active')
+      .find('i').removeClass('fa-regular').addClass('fa-solid');
+  }
+});
+
+// Handle click
+$('.fav-btn').click(function (e) {
+  // stop the <a> link from firing
+  e.preventDefault();
+  e.stopPropagation();
+
+  const card = $(this).closest('.card');
+  const title = card.data('name');
+  
+  if (favourites.includes(title)) {
+    // Remove from favourites
+    favourites = favourites.filter(f => f !== title);
+    $(this).removeClass('active')
+      .find('i').removeClass('fa-solid').addClass('fa-regular');
+  } else {
+    // Add to favourites
+    favourites.push(title);
+    $(this).addClass('active')
+      .find('i').removeClass('fa-regular').addClass('fa-solid');
+  }
+
+  // Save back to localStorage
+  localStorage.setItem('favourites', JSON.stringify(favourites));
+});
 	
 </body>
 </html>
