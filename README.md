@@ -1,1 +1,1 @@
-Created replacement site for https://cracroftuku.wordpress.com/ -> https://xxxxxxx.co.nz/
+Created replacement site for https://cracroftuku.wordpress.com/ -> https://cashmereukulelegroup.nz/
