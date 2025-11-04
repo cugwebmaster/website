@@ -432,7 +432,7 @@
 </a>
 <a class="link-nochange" href="pdfs/73-purple-haze-of-summer-time180105.pdf">
  <div class="card" data-name="73. Purple Haze of Summer Time180105">
-  <p>73. Purple Haze of Summer Time180105</p>
+  <p>73. Purple Haze of Summer Time</p>
   <img src="covers/art.jpg">
  </div>
 </a>
