@@ -1775,7 +1775,7 @@
  </div>
 </a>
 <a class="link-nochange" href="pdfs/323-guardian-angel-guiding-light-230904.pdf">
- <div class="card" data-name="323. NOT USED Guardian Angel Guiding Light">
+ <div class="card" data-name="323. Guardian Angel Guiding Light">
   <p>323. Guardian Angel Guiding Light</p>
   <img src="covers/art.jpg">
  </div>
