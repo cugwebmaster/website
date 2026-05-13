@@ -8,8 +8,8 @@ const songsData = [
     "pdf": "pdfs/1-Advertising-Jingles.pdf",
     "dataName": "1. Advertising Jingles",
     "chords": [""],
-    "speed": 17,
-    "zoom": 2.20,
+    "speed": 62,
+    "zoom": 3.10,
     "scenes": [
     {
       "at": 0.64,     
@@ -28,7 +28,7 @@ const songsData = [
     "pdf": "pdfs/2-Aunty-Alice.pdf",
     "dataName": "2. Aunty Alice",
     "chords": ["D7"],
-    "speed": 17,
+    "speed": 27,
     "zoom": 2.20
   },
   {
@@ -40,8 +40,8 @@ const songsData = [
     "pdf": "pdfs/3-April-Sun-In-Cuba.pdf",
     "dataName": "3. April Sun In Cuba",
     "chords": ["asus4","bm","gm7"],
-    "speed": 17,
-    "zoom": 2.20
+    "speed": 27,
+    "zoom": 2.35
   },
   {
     "id": "song-4",
