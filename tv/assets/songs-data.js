@@ -39,7 +39,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/3-April-Sun-In-Cuba.pdf",
     "dataName": "3. April Sun In Cuba",
-    "chords": ["asus4trans","bm","gm7"],
+    "chords": ["A","asus4","bm"],
     "speed": 27,
     "zoom": 2.35
   },
