@@ -27,7 +27,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/2-Aunty-Alice.pdf",
     "dataName": "2. Aunty Alice",
-    "chords": ["D7"],
+    "chords": [""],
     "speed": 27,
     "zoom": 2.20
   },
@@ -39,7 +39,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/3-April-Sun-In-Cuba.pdf",
     "dataName": "3. April Sun In Cuba",
-    "chords": ["asus4","bm","gm7"],
+    "chords": ["asus4trans","bm","gm7"],
     "speed": 27,
     "zoom": 2.35
   },
