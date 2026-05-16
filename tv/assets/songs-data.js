@@ -51,7 +51,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/4-Cheryl-Moana-Marie.pdf",
     "dataName": "4. Cheryl Moana Marie",
-    "chords": ["D7"],
+    "chords": [""],
     "speed": 17,
     "zoom": 2.20
   },
@@ -63,7 +63,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/5-Damn-The-Dam.pdf",
     "dataName": "5. Damn The Dam",
-    "chords": ["em","bm","e","b7"],
+    "chords": ["bm","b7"],
     "speed": 17,
     "zoom": 2.20
   },
@@ -75,6 +75,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/6-Dance-All-Around-The-World.pdf",
     "dataName": "6. Dance All Around The World"
+     "chords": ["bm","fs"]
   },
   {
     "id": "song-7",
@@ -111,7 +112,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/10-Forever-Tuesday-Morning.pdf",
     "dataName": "10. Forever Tuesday Morning",
-    "chords": ["cm","em"],
+    "chords": ["cm"],
     "speed": 17,
     "zoom": 2.20
   },
@@ -123,7 +124,6 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/11-Hands-Of-My-Heart.pdf",
     "dataName": "11. Hands Of My Heart",
-    "chords": ["D7"],
     "speed": 17,
     "zoom": 2.20
   },
@@ -189,7 +189,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/18-Pretty-Girl-.pdf",
     "dataName": "18. Pretty Girl",
-     "chords": ["e7"],
+     "chords": ["b7","fs"],
     "speed": 17,
     "zoom": 2.20
   },
@@ -201,7 +201,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/19-Shes-a-Mod.pdf",
     "dataName": "19. Shes a Mod",
-    "chords": ["dm"],
+    "chords": [""],
     "speed": 17,
     "zoom": 2.20
   },
@@ -222,7 +222,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/21-Slice-of-Heaven.pdf",
     "dataName": "21. Slice of Heaven",
-    "chords": ["em"],
+    "chords": [""],
     "speed": 17,
     "zoom": 2.20
   },
@@ -234,7 +234,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/22-Tea-at-Te-Kuiti.pdf",
     "dataName": "22. Tea at Te Kuiti",
-    "chords": ["D7"],
+    "chords": [""],
     "speed": 17,
     "zoom": 2.20
   },
@@ -246,7 +246,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/23-The-Gumboot-Song.pdf",
     "dataName": "23. The Gumboot Song",
-    "chords": ["Dm"],
+    "chords": [""],
     "speed": 17,
     "zoom": 2.20
   },
