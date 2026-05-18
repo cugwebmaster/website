@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <link rel="icon" type="image/x-icon" href="./assets/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,6 +25,16 @@
 html, body { margin: 0; min-height: 100%; background: var(--bg); color: var(--ink); font-family: 'Noto Sans', system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
 button, input { font: inherit; }
 .hide { display: none !important; }
+
+/* Hide cursor and fullscreen button once TV is fullscreen */
+body.is-fullscreen,
+body.is-fullscreen * {
+  cursor: none !important;
+}
+
+body.is-fullscreen .fs-button {
+  display: none !important;
+}
 
 /* ── Site banner ── */
 .sws-banner {
@@ -188,8 +198,38 @@ button, input { font: inherit; }
 }
 
 /* ── Remote ── */
-body.remote { background: var(--bg); overflow: auto; }
-.remoteWrap { padding: 20px 18px 50px; max-width: 620px; margin: 0 auto; }
+body.remote {
+  background: var(--bg);
+  width: 100vw;
+  height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  touch-action: manipulation;
+  overscroll-behavior: none;
+}
+
+body.remote #app {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.remoteWrap {
+  padding: 20px 18px 50px;
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+body.remote .remoteWrap {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  margin: 0;
+  padding: 16px;
+  overflow: hidden;
+  display: flex;
+}
+
 .remotePanel {
   background: var(--card);
   border: 2px solid transparent;
@@ -202,9 +242,20 @@ body.remote { background: var(--bg); overflow: auto; }
   box-shadow: var(--shadow);
   margin-bottom: 18px;
 }
+
+body.remote .remotePanel {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 24px max(18px, env(safe-area-inset-bottom));
+}
+
 .remotePanel h2 { 
-  margin: 0 0 6px; 
-  font-size: 24px; 
+  margin: 0 0 10px; 
+  font-size: 26px; 
   background: linear-gradient(135deg, #10b981 0%, #059669 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -212,16 +263,17 @@ body.remote { background: var(--bg); overflow: auto; }
   font-weight: 900;
 }
 .rStatus {
-  padding: 14px 16px;
+  padding: 13px 14px;
   border: 1px solid var(--line);
   border-radius: 14px;
   background: #fff;
   color: #000;
   font-size: 15px;
-  margin-bottom: 18px;
-  margin-top: 10px;
-  line-height: 1.4;
+  margin-bottom: 12px;
+  margin-top: 8px;
+  line-height: 1.35;
   font-weight: 600;
+  flex-shrink: 0;
 }
 .rStatus.playing { 
   border-color: #10b981; 
@@ -230,7 +282,7 @@ body.remote { background: var(--bg); overflow: auto; }
   font-weight: 600;
 }
 /* Search */
-.searchWrap { position: relative; margin-bottom: 12px; }
+.searchWrap { position: relative; margin-bottom: 10px; flex-shrink: 0; }
 .searchWrap input[type=search] {
   width: 100%;
   border: 2px solid var(--line);
@@ -255,7 +307,33 @@ body.remote { background: var(--bg); overflow: auto; }
   cursor: pointer; padding: 6px; line-height: 1; display: none;
 }
 /* Search results */
-.songList { display: grid; gap: 8px; max-height: 44vh; overflow-y: auto; overflow-x: hidden; margin-bottom: 0; margin-top: 12px; }
+.songList,
+#songList {
+  display: grid;
+  gap: 8px;
+  max-height: 44vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 0;
+  margin-top: 6px;
+}
+
+body.remote .songList,
+body.remote #songList {
+  flex: 0 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 0;
+  -webkit-overflow-scrolling: touch;
+}
+
+body.remote #songList.has-results {
+  flex: 1 1 auto;
+  max-height: none;
+  margin-bottom: 12px;
+}
+
 .searchHint { text-align: center; color: var(--muted); padding: 20px 14px; font-size: 15px; }
 .songBtn {
   text-align: left;
@@ -281,14 +359,15 @@ body.remote { background: var(--bg); overflow: auto; }
 /* Control buttons */
 .controls-info {
   display: flex;
-  gap: 16px;
+  gap: 14px;
   justify-content: center;
-  padding: 13px 16px;
+  padding: 12px 14px;
   background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(5, 150, 105, 0.08) 100%);
   border-radius: 14px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   border: 1px solid rgba(16, 185, 129, 0.2);
   flex-wrap: wrap;
+  flex-shrink: 0;
 }
 .info-item {
   display: flex;
@@ -305,8 +384,13 @@ body.remote { background: var(--bg); overflow: auto; }
   font-weight: 800;
   color: #065f46;
 }
-.divider { height: 1px; background: var(--line); margin: 18px 0; }
-.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.divider { display: none; }
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex-shrink: 0;
+}
 .grid-3col { grid-template-columns: 1fr 1fr 1fr; }
 .btn {
   border: 1px solid var(--line);
@@ -314,7 +398,7 @@ body.remote { background: var(--bg); overflow: auto; }
   background: #fff;
   color: var(--ink);
   font-weight: 700;
-  padding: 16px 10px;
+  padding: 16px 12px;
   cursor: pointer;
   font-size: 15px;
   line-height: 1.3;
@@ -333,13 +417,25 @@ body.remote { background: var(--bg); overflow: auto; }
   box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
 }
 .btn.wide { grid-column: 1 / -1; font-size: 18px; padding: 20px 12px; }
+
+@media (max-height: 720px) {
+  body.remote .remoteWrap { padding: 10px; }
+  body.remote .remotePanel { padding: 16px 16px max(12px, env(safe-area-inset-bottom)); border-radius: 14px; }
+  .remotePanel h2 { font-size: 22px; margin-bottom: 6px; }
+  .searchWrap input[type=search] { padding-top: 12px; padding-bottom: 12px; font-size: 16px; }
+  .rStatus { padding: 10px 12px; margin-bottom: 8px; font-size: 14px; }
+  .controls-info { padding: 9px 10px; margin-bottom: 8px; gap: 10px; }
+  .grid { gap: 8px; }
+  .btn { padding: 12px 8px; font-size: 14px; border-radius: 12px; }
+  .btn.wide { padding: 15px 10px; font-size: 16px; }
+}
 </style>
 </head>
 <body>
 <div id="app"></div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="https://cdn.ably.com/lib/ably.min-2.js"></script>
 <script>
 (function () {
 'use strict';
@@ -347,6 +443,13 @@ body.remote { background: var(--bg); overflow: auto; }
 /* ── Config ── */
 const DATA_PATH  = './assets/songs-data.js';
 const SETTINGS_KEY = 'sws-tv-v3';
+
+// Ably setup.
+// Best option: leave ABLY_KEY_DIRECT empty and use the /api/ably-token endpoint.
+// Temporary option: paste a restricted Ably API key below until you can access Cloudflare.
+const ABLY_AUTH_URL = '/api/ably-token';
+const ABLY_KEY_DIRECT = 'FydKAA.Ps0-7w:drBDxOm8EOQUTDHnke-nTydSOvN89mmSPt7fAZjMwGw';
+const ABLY_CHANNEL_PREFIX = 'sws-tv-room-';
 
 /* ── Shared state ── */
 const state = {
@@ -360,8 +463,8 @@ const state = {
   last:         0,
   scrollAccumulator: 0,
   renderToken:  0,
-  peer:         null,
-  conn:         null,
+  peer:         null, // Ably realtime client
+  conn:         null, // Ably channel
   songLoaded:   false, // Track if a song has been selected
   savedScrollPos: null, // Saved scroll position for chorus jumps
   scenesFired:  new Set(), // Track which scenes have already fired
@@ -383,12 +486,40 @@ const esc  = s  => String(s ?? '').replace(/[&<>"']/g, c =>
 const abs  = p  => new URL(p, location.href).href;
 const save = () => localStorage.setItem(SETTINGS_KEY, JSON.stringify({zoom: state.zoom, speed: state.speed}));
 
+function makeRoomCode() {
+  return Math.random().toString(36).slice(2, 8).toUpperCase();
+}
+
+function makeAblyClient(role) {
+  const clientId = role + '-' + Math.random().toString(36).slice(2, 9);
+
+  if (ABLY_KEY_DIRECT && ABLY_KEY_DIRECT.trim()) {
+    return new Ably.Realtime({
+      key: ABLY_KEY_DIRECT.trim(),
+      clientId,
+      closeOnUnload: true,
+    });
+  }
+
+  return new Ably.Realtime({
+    authUrl: ABLY_AUTH_URL,
+    authMethod: 'POST',
+    clientId,
+    closeOnUnload: true,
+  });
+}
+
+
 /* ── Site nav snippet ── */
 const NAV = `<div class="sws-banner"></div>`;
 
 /* ── Scene ── */
 const isRemote = new URLSearchParams(location.search).has('remote');
 if (isRemote) { bootRemote(); } else { bootTv(); }
+
+document.addEventListener('fullscreenchange', () => {
+  document.body.classList.toggle('is-fullscreen', !!document.fullscreenElement);
+});
 
 /* ════════════════════════════════════════
    TV SIDE
@@ -456,28 +587,64 @@ function setQr(url) {
 }
 
 function setupPeer() {
-  if (!window.Peer) { tvStatus('PeerJS failed to load.', true); return; }
-  const peerId = 'sws-tv-' + Math.random().toString(36).slice(2, 9);
-  const peer = new Peer(peerId, { debug: 0 });
-  state.peer = peer;
+  if (!window.Ably) { tvStatus('Ably failed to load.', true); return; }
 
-  peer.on('open', id => {
-    const url = location.origin + location.pathname + '?remote=' + encodeURIComponent(id);
-    setQr(url);
-    tvStatus(url, false);
+  const roomId = makeRoomCode();
+  const remoteUrl = location.origin + location.pathname + '?remote=' + encodeURIComponent(roomId);
+  setQr(remoteUrl);
+  tvStatus('Room created. Scan QR to connect remote.\nCode: ' + roomId, false);
+
+  const ably = makeAblyClient('tv');
+  const channel = ably.channels.get(ABLY_CHANNEL_PREFIX + roomId);
+  state.peer = ably;
+  state.conn = channel;
+
+  ably.connection.on('connected', () => {
+    tvStatus('TV connected. Scan QR to connect remote.', false);
+    sendSongs();
+    sendTvState();
   });
 
-  peer.on('connection', c => {
-    state.conn = c;
-    tvStatus('Remote connected.', false);
+  ably.connection.on('failed', err => {
+    tvStatus('Ably connection failed: ' + (err?.message || err?.reason?.message || 'Unknown error'), true);
+  });
+
+  ably.connection.on('disconnected', () => {
+    tvStatus('TV disconnected from Ably. Trying to reconnect…', true);
+  });
+
+  ably.connection.on('suspended', () => {
+    tvStatus('TV connection suspended. Check internet connection or Ably token endpoint.', true);
+  });
+
+  channel.subscribe('remote-hello', () => {
     showStage();
-    c.on('open',  () => { sendSongs(); sendTvState(); });
-    c.on('data',  handleTvCommand);
-    c.on('close', () => tvStatus('Remote disconnected.\nRefresh this page to show a new QR code.', true));
-    c.on('error', e => tvStatus('Connection error: ' + (e.message || e), true));
+    sendSongs();
+    sendTvState();
   });
 
-  peer.on('error', e => tvStatus('Peer error: ' + (e.message || e.type || e), true));
+  channel.subscribe('remote-command', msg => {
+    handleTvCommand(msg.data);
+  });
+
+  channel.presence.enter({ role: 'tv' }).catch(err => {
+    tvStatus('Could not enter Ably presence: ' + (err?.message || 'Unknown error'), true);
+  });
+
+  channel.presence.subscribe('enter', member => {
+    if (member.data?.role === 'remote') {
+      tvStatus('Remote connected.', false);
+      showStage();
+      sendSongs();
+      sendTvState();
+    }
+  });
+
+  channel.presence.subscribe('leave', member => {
+    if (member.data?.role === 'remote') {
+      tvStatus('Remote disconnected. Re-scan QR to reconnect.', true);
+    }
+  });
 }
 
 function showStage() {
@@ -487,12 +654,12 @@ function showStage() {
   const pairHeading = $('pairHeading');
   const pairSub = $('pairSub');
   const fsButton = $('fsButton');
-  
+
   if (pairContent) pairContent.classList.add('hide');
   if (readyContent) readyContent.classList.remove('hide');
   if (pairHeading) pairHeading.classList.add('hide');
   if (pairSub) pairSub.classList.add('hide');
-  
+
   // Make the Full Screen button clickable
   if (fsButton && !fsButton._fsHandler) {
     fsButton._fsHandler = true;
@@ -508,8 +675,13 @@ function showSongStage() {
 }
 
 function tryFullscreen() {
-  if (!document.fullscreenElement)
-    document.documentElement.requestFullscreen?.().catch(() => {});
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen?.()
+      .then(() => {
+        document.body.classList.add('is-fullscreen');
+      })
+      .catch(() => {});
+  }
 }
 
 /* ── Song loading ── */
@@ -541,7 +713,7 @@ async function loadSong(idx, keepHidden) {
   if (!state.songs.length) return;
   state.current = ((idx % state.songs.length) + state.songs.length) % state.songs.length;
   state.songLoaded = true; // Mark that a song has been selected
-  
+
   // Reset scene tracking
   state.scenesFired.clear();
   state.activeScene = null;
@@ -549,27 +721,27 @@ async function loadSong(idx, keepHidden) {
     clearTimeout(state.sceneTimer);
     state.sceneTimer = null;
   }
-  
+
   const song = state.songs[state.current];
   const pages = $('pages');
   if (!keepHidden) showSongStage();
   stopScroll(false);
-  
+
   // Apply song-specific zoom if provided
   if (song.zoom !== undefined && typeof song.zoom === 'number') {
     state.zoom = Math.max(0.8, Math.min(3.5, song.zoom));
     save();
   }
-  
+
   // Apply song-specific speed if provided
   if (song.speed !== undefined && typeof song.speed === 'number') {
     state.speed = Math.max(2, Math.min(100, song.speed));
     save();
   }
-  
+
   // Display chords if provided
   displayChords(song.chords);
-  
+
   sendTvState(); // Send state immediately to update remote with new song name
   state.renderToken++;
   const token = state.renderToken;
@@ -593,15 +765,15 @@ async function loadSong(idx, keepHidden) {
 function displayChords(chords) {
   const panel = $('chordsPanel');
   const list = $('chordsList');
-  
+
   if (!panel || !list) return;
-  
+
   // If no chords, hide panel
   if (!chords || !Array.isArray(chords) || chords.length === 0) {
     panel.classList.add('hide');
     return;
   }
-  
+
   // Show panel and populate with chord images
   panel.classList.remove('hide');
   list.innerHTML = chords.map(chord => {
@@ -635,47 +807,47 @@ function playScroll() {
 function startScrollAnimation() {
   const stage = $('stage');
   if (!stage) return;
-  
+
   // Start playing
   state.playing = true;
   state.last = performance.now();
   state.scrollAccumulator = stage.scrollTop; // Track fractional pixels
   sendTvState();
-  
+
   let lastStateUpdate = performance.now();
-  
+
   // Begin animation loop
   function animate(now) {
     if (!state.playing) return; // Stop requested
-    
+
     const stage = $('stage');
     if (!stage) {
       state.playing = false;
       sendTvState();
       return;
     }
-    
+
     // Calculate time delta and scroll
     const dt = (now - state.last) / 1000;
     state.last = now;
-    
+
     // Accumulate fractional scroll amount
     state.scrollAccumulator += (state.speed * dt);
-    
+
     // Apply integer part to scrollTop
     stage.scrollTop = Math.floor(state.scrollAccumulator);
-    
+
     // Check for scene triggers (only if not currently in a scene)
     if (!state.activeScene) {
       checkScenes(stage);
     }
-    
+
     // Update remote state every 500ms while playing
     if (now - lastStateUpdate > 500) {
       sendTvState();
       lastStateUpdate = now;
     }
-    
+
     // Check if at bottom
     const scrollRemaining = stage.scrollHeight - stage.scrollTop - stage.clientHeight;
     if (scrollRemaining <= 4) {
@@ -683,31 +855,31 @@ function startScrollAnimation() {
       sendTvState();
       return;
     }
-    
+
     // Continue animation
     state.raf = requestAnimationFrame(animate);
   }
-  
+
   state.raf = requestAnimationFrame(animate);
 }
 
 function checkScenes(stage) {
   const song = state.songs[state.current];
   if (!song || !song.scenes || !Array.isArray(song.scenes)) return;
-  
+
   // Calculate current location as percentage
   const maxScroll = stage.scrollHeight - stage.clientHeight;
   if (maxScroll <= 0) return;
   const currentLocation = stage.scrollTop / maxScroll;
-  
+
   // Check each scene
   for (let i = 0; i < song.scenes.length; i++) {
     const scene = song.scenes[i];
     const sceneKey = `route_${i}`;
-    
+
     // Skip if already fired
     if (state.scenesFired.has(sceneKey)) continue;
-    
+
     // Check if we've reached the trigger point (within 1% tolerance)
     if (currentLocation >= scene.at - 0.01 && currentLocation <= scene.at + 0.01) {
       executeScene(scene, sceneKey, stage);
@@ -720,17 +892,17 @@ function executeScene(scene, sceneKey, stage) {
   // Mark as fired
   state.scenesFired.add(sceneKey);
   state.activeScene = scene;
-  
+
   // Save current position and playing state
   const returnPosition = stage.scrollTop;
   const wasPlaying = state.playing;
-  
+
   // Jump to target location
   const maxScroll = stage.scrollHeight - stage.clientHeight;
   const targetScroll = maxScroll * scene.goto;
   stage.scrollTop = targetScroll;
   state.scrollAccumulator = targetScroll;
-  
+
   // Handle mode: pause or scroll (default is scroll)
   const mode = scene.mode || 'scroll';
   if (mode === 'pause' && state.playing) {
@@ -741,12 +913,12 @@ function executeScene(scene, sceneKey, stage) {
       state.raf = 0;
     }
   }
-  
+
   sendTvState();
-  
+
   // Set timer for scene completion
   const duration = (scene.for || 0) * 1000; // Convert seconds to milliseconds
-  
+
   if (duration > 0) {
     state.sceneTimer = setTimeout(() => {
       if (!stage) {
@@ -754,7 +926,7 @@ function executeScene(scene, sceneKey, stage) {
         state.sceneTimer = null;
         return;
       }
-      
+
       // Determine where to go after scene completes
       if (scene.then === 'stop') {
         // Stop playback completely
@@ -768,7 +940,7 @@ function executeScene(scene, sceneKey, stage) {
         sendTvState();
         return;
       }
-      
+
       let finalPosition;
       if (scene.then === 'continue') {
         // Stay at current position
@@ -780,15 +952,15 @@ function executeScene(scene, sceneKey, stage) {
         // Default: "back" - return to original trigger position
         finalPosition = returnPosition;
       }
-      
+
       stage.scrollTop = finalPosition;
       state.scrollAccumulator = finalPosition;
-      
+
       // Resume playback if it was paused by this scene
       if (mode === 'pause' && wasPlaying && !state.playing) {
         startScrollAnimation();
       }
-      
+
       state.activeScene = null;
       state.sceneTimer = null;
       sendTvState();
@@ -802,13 +974,13 @@ function executeScene(scene, sceneKey, stage) {
 function triggerNextScene() {
   const song = state.songs[state.current];
   const stage = $('stage');
-  
+
   if (!song || !song.scenes || !Array.isArray(song.scenes) || !stage) return;
-  
+
   // Find the first scene that hasn't been fired yet
   for (let i = 0; i < song.scenes.length; i++) {
     const sceneKey = `route_${i}`;
-    
+
     if (!state.scenesFired.has(sceneKey)) {
       // Found an unfired scene - execute it
       const scene = song.scenes[i];
@@ -841,7 +1013,7 @@ function restart() {
     stage.scrollTop = 0;
     state.scrollAccumulator = 0;
   }
-  
+
   // Reset scene tracking
   state.scenesFired.clear();
   state.activeScene = null;
@@ -849,7 +1021,7 @@ function restart() {
     clearTimeout(state.sceneTimer);
     state.sceneTimer = null;
   }
-  
+
   stopScroll();
 }
 
@@ -868,32 +1040,32 @@ function commandSpeed(delta) {
 
 /* ── PeerJS messaging (TV side) ── */
 function sendSongs() {
-  if (!state.conn?.open) return;
-  state.conn.send({
+  if (!state.conn) return;
+  state.conn.publish('tv-songs', {
     type:    'songs',
     songs:   state.songs.map((s, i) => ({ index: i, number: s.number, title: s.title, artist: s.artist, genre: s.genre })),
     current: state.current,
   });
 }
 function sendTvState() {
-  if (!state.conn?.open) return;
-  
+  if (!state.conn) return;
+
   // Calculate current location as percentage
   const stage = $('stage');
   let locationPercent = 0;
-  if (stage && stage.scrollHeight > 0) {
+  if (stage && stage.scrollHeight > stage.clientHeight) {
     locationPercent = Math.round((stage.scrollTop / (stage.scrollHeight - stage.clientHeight)) * 100);
     // Clamp to 0-100
     locationPercent = Math.max(0, Math.min(100, locationPercent));
   }
-  
+
   // Update chord panel location display
   const locationEl = $('chordsLocation');
   if (locationEl) {
     locationEl.textContent = `${locationPercent}%`;
   }
-  
-  state.conn.send({
+
+  state.conn.publish('tv-state', {
     type:    'state',
     current: state.current,
     song:    state.songLoaded ? (state.songs[state.current]?.title || '') : '',
@@ -931,14 +1103,6 @@ function bootRemote() {
       <div class="remotePanel">
         <h2>TV Remote</h2>
 
-        <div class="searchWrap">
-          <input id="search" type="search" placeholder="Song number or name..."
-                 autocomplete="off" autocorrect="off" spellcheck="false" inputmode="search">
-          <button class="clearBtn" id="clearBtn" aria-label="Clear search">✕</button>
-        </div>
-
-        <div id="songList"></div>
-        
         <div id="rStatus" class="rStatus">Connecting to TV…</div>
 
         <div id="controlsInfo" class="controls-info hide">
@@ -956,6 +1120,14 @@ function bootRemote() {
           </div>
         </div>
 
+        <div class="searchWrap">
+          <input id="search" type="search" placeholder="Song number or name..."
+                 autocomplete="off" autocorrect="off" spellcheck="false" inputmode="search">
+          <button class="clearBtn" id="clearBtn" aria-label="Clear search">✕</button>
+        </div>
+
+        <div id="songList"></div>
+
         <div class="divider"></div>
 
         <div class="grid">
@@ -970,6 +1142,16 @@ function bootRemote() {
         </div>
       </div>
     </div>`;
+
+  // Prevent double-tap zoom on remote
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', function (event) {
+    const now = Date.now();
+    if (now - lastTouchEnd <= 300) {
+      event.preventDefault();
+    }
+    lastTouchEnd = now;
+  }, { passive: false });
 
   // Wire up controls
   $('search').addEventListener('input', renderSongList);
@@ -990,26 +1172,44 @@ function bootRemote() {
 }
 
 function startRemotePeer() {
-  const target = new URLSearchParams(location.search).get('remote');
+  const roomId = new URLSearchParams(location.search).get('remote');
   const statusEl = $('rStatus');
-  if (!target || target === 'manual') {
+  if (!roomId || roomId === 'manual') {
     statusEl.textContent = 'TV is not ready yet — refresh the TV page and re-scan the QR.';
     return;
   }
-  if (!window.Peer) { statusEl.textContent = 'PeerJS library failed to load.'; return; }
+  if (!window.Ably) { statusEl.textContent = 'Ably library failed to load.'; return; }
 
-  const peer = new Peer(null, { debug: 0 });
-  state.peer = peer;
+  const ably = makeAblyClient('remote');
+  const channel = ably.channels.get(ABLY_CHANNEL_PREFIX + roomId);
+  state.peer = ably;
+  state.conn = channel;
 
-  peer.on('open', () => {
-    const conn = peer.connect(target, { reliable: true });
-    state.conn = conn;
-    conn.on('open',  () => { setRStatus('Connected — loading songs…', false); sendCmd('hello'); });
-    conn.on('data',  handleRemoteData);
-    conn.on('close', () => setRStatus('Disconnected — re-scan the QR code', false));
-    conn.on('error', e  => setRStatus('Connection error: ' + (e.message || e), false));
+  ably.connection.on('connected', () => {
+    setRStatus('Connected — loading songs…', false);
+    channel.presence.enter({ role: 'remote' }).catch(() => {});
+    channel.publish('remote-hello', { type: 'hello' });
   });
-  peer.on('error', e => setRStatus('Peer error: ' + (e.message || e.type || e), false));
+
+  ably.connection.on('failed', err => {
+    setRStatus('Ably connection failed: ' + (err?.message || err?.reason?.message || 'Unknown error'), false);
+  });
+
+  ably.connection.on('disconnected', () => {
+    setRStatus('Disconnected from Ably. Trying to reconnect…', false);
+  });
+
+  ably.connection.on('suspended', () => {
+    setRStatus('Ably connection suspended. Check internet connection or token endpoint.', false);
+  });
+
+  channel.subscribe('tv-songs', msg => {
+    handleRemoteData(msg.data);
+  });
+
+  channel.subscribe('tv-state', msg => {
+    handleRemoteData(msg.data);
+  });
 }
 
 function setRStatus(msg, playing) {
@@ -1019,8 +1219,11 @@ function setRStatus(msg, playing) {
 }
 
 function sendCmd(cmd, value) {
-  if (state.conn?.open) state.conn.send({ cmd, value });
-  else setRStatus('Not connected to TV.', false);
+  if (state.conn) {
+    state.conn.publish('remote-command', { cmd, value });
+  } else {
+    setRStatus('Not connected to TV.', false);
+  }
 }
 
 function handleRemoteData(d) {
@@ -1036,16 +1239,16 @@ function handleRemoteData(d) {
   if (d.type === 'state') {
     const previousCurrent = state.remoteCurrent;
     state.remoteCurrent = Number(d.current || 0);
-    
+
     const playing = Boolean(d.playing);
     const song = d.song || '';
-    
+
     // Update zoom, speed, and location displays
     const zoomDisplay = $('zoomDisplay');
     const speedDisplay = $('speedDisplay');
     const locationDisplay = $('locationDisplay');
     const controlsInfo = $('controlsInfo');
-    
+
     if (d.zoom !== undefined && zoomDisplay) {
       zoomDisplay.textContent = d.zoom + '%';
     }
@@ -1055,19 +1258,19 @@ function handleRemoteData(d) {
     if (d.location !== undefined && locationDisplay) {
       locationDisplay.textContent = d.location + '%';
     }
-    
+
     // Show controls info when we have state data
     if (controlsInfo) {
       controlsInfo.classList.remove('hide');
     }
-    
+
     // If no song is loaded, show "Ready to Go"
     if (!song) {
       setRStatus('Ready to Go', false);
     } else {
       setRStatus((playing ? 'Playing: ' : 'Paused: ') + song, playing);
     }
-    
+
     const tb = $('toggleBtn');
     if (tb) tb.textContent = playing ? 'Pause' : 'Play';
     renderSongList(); // refresh active state
@@ -1083,8 +1286,11 @@ function renderSongList() {
 
   if (!q) {
     list.innerHTML = '';
+    list.classList.remove('has-results');
     return;
   }
+
+  list.classList.add('has-results');
 
   const matches = state.remoteSongs.filter(s =>
     (s.number || '').toLowerCase().includes(q) ||
@@ -1116,5 +1322,6 @@ function renderSongList() {
 
 })();
 </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v833ccba57c9e4d2798f2e76cebdd09a11778172276447" integrity="sha512-57MDmcccJXYtNnH+ZiBwzC4jb2rvgVCEokYN+L/nLlmO8rfYT/gIpW2A569iJ/3b+0UEasghjuZH/ma3wIs/EQ==" data-cf-beacon='{"version":"2024.11.0","token":"3feb60b60ca64862bd21cfa462e655c7","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
 </body>
 </html>
