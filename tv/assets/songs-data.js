@@ -74,7 +74,7 @@ const songsData = [
     "artist": "NA",
     "genre": "NA",
     "pdf": "pdfs/6-Dance-All-Around-The-World.pdf",
-    "dataName": "6. Dance All Around The World"
+    "dataName": "6. Dance All Around The World",
      "chords": ["bm","fs"]
   },
   {
