@@ -9,7 +9,7 @@ const songsData = [
     "dataName": "1. Advertising Jingles",
     "chords": [""],
     "speed": 62,
-    "zoom": 3.10,
+    "zoom": 3.50,
     "scenes": [
     {
       "at": 0.64,     
@@ -29,7 +29,7 @@ const songsData = [
     "dataName": "2. Aunty Alice",
     "chords": [""],
     "speed": 27,
-    "zoom": 2.20
+    "zoom": 3.50
   },
   {
     "id": "song-3",
@@ -41,7 +41,7 @@ const songsData = [
     "dataName": "3. April Sun In Cuba",
     "chords": ["a","asus4","bm","gmaj7"],
     "speed": 27,
-    "zoom": 2.35
+    "zoom": 3.50
   },
   {
     "id": "song-4",
@@ -53,7 +53,7 @@ const songsData = [
     "dataName": "4. Cheryl Moana Marie",
     "chords": [""],
     "speed": 17,
-    "zoom": 2.20
+    "zoom": 3.50
   },
   {
     "id": "song-5",
@@ -65,7 +65,7 @@ const songsData = [
     "dataName": "5. Damn The Dam",
     "chords": ["bm","b7"],
     "speed": 17,
-    "zoom": 2.20
+    "zoom": 3.25
   },
   {
     "id": "song-6",
@@ -75,7 +75,8 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/6-Dance-All-Around-The-World.pdf",
     "dataName": "6. Dance All Around The World",
-     "chords": ["bm","fs"]
+     "chords": ["bm","fs"],
+     "zoom": 3.25
   },
   {
     "id": "song-7",
@@ -84,7 +85,8 @@ const songsData = [
     "artist": "NA",
     "genre": "NA",
     "pdf": "pdfs/7-Do-The-Blue-Beat.pdf",
-    "dataName": "7. Do The Blue Beat"
+    "dataName": "7. Do The Blue Beat",
+    "zoom": 3.50
   },
   {
     "id": "song-8",
@@ -93,7 +95,9 @@ const songsData = [
     "artist": "NA",
     "genre": "NA",
     "pdf": "pdfs/8-Dont-You-Know-Yockomo.pdf",
-    "dataName": "8. Dont You Know Yockomo"
+    "dataName": "8. Dont You Know Yockomo",
+    "speed": 67,
+    "zoom": 3.35
   },
   {
     "id": "song-9",
@@ -102,7 +106,9 @@ const songsData = [
     "artist": "NA",
     "genre": "NA",
     "pdf": "pdfs/9-Down-The-Hall-on.pdf",
-    "dataName": "9. Down The Hall on"
+    "dataName": "9. Down The Hall on",
+    "speed": 67,
+    "zoom": 2.90
   },
   {
     "id": "song-10",
@@ -113,8 +119,8 @@ const songsData = [
     "pdf": "pdfs/10-Forever-Tuesday-Morning.pdf",
     "dataName": "10. Forever Tuesday Morning",
     "chords": ["cm"],
-    "speed": 17,
-    "zoom": 2.20
+    "speed": 72,
+    "zoom": 3.40
   },
   {
     "id": "song-11",
@@ -124,8 +130,8 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/11-Hands-Of-My-Heart.pdf",
     "dataName": "11. Hands Of My Heart",
-    "speed": 17,
-    "zoom": 2.20
+    "speed": 95,
+    "zoom": 3.50
   },
   {
     "id": "song-12",
@@ -134,7 +140,9 @@ const songsData = [
     "artist": "NA",
     "genre": "NA",
     "pdf": "pdfs/12-I-See-Red.pdf",
-    "dataName": "12. I See Red"
+    "dataName": "12. I See Red",
+    "speed": 60,
+    "zoom": 3.50
   },
   {
     "id": "song-13",
@@ -143,7 +151,9 @@ const songsData = [
     "artist": "NA",
     "genre": "NA",
     "pdf": "pdfs/13-Island-Queen.pdf",
-    "dataName": "13. Island Queen"
+    "dataName": "13. Island Queen",
+    "speed": 30,
+    "zoom": 3.35
   },
   {
     "id": "song-14",
@@ -152,7 +162,9 @@ const songsData = [
     "artist": "NA",
     "genre": "NA",
     "pdf": "pdfs/14-Love-in-a-Fowlhouse.pdf",
-    "dataName": "14. Love in a Fowlhouse"
+    "dataName": "14. Love in a Fowlhouse",
+    "speed": 55,
+    "zoom": 2.75
   },
   {
     "id": "song-15",
@@ -161,7 +173,9 @@ const songsData = [
     "artist": "NA",
     "genre": "NA",
     "pdf": "pdfs/15-Poi-E.pdf",
-    "dataName": "15. Poi E"
+    "dataName": "15. Poi E",
+    "speed": 25,
+    "zoom": 3.50
   },
   {
     "id": "song-16",
@@ -170,7 +184,9 @@ const songsData = [
     "artist": "NA",
     "genre": "NA",
     "pdf": "pdfs/16-Pokarekare-Ana.pdf",
-    "dataName": "16. Pokarekare Ana"
+    "dataName": "16. Pokarekare Ana",
+    "speed": 40,
+    "zoom": 3.50
   },
   {
     "id": "song-17",
@@ -179,7 +195,9 @@ const songsData = [
     "artist": "NA",
     "genre": "NA",
     "pdf": "pdfs/17-Put-Another-Log-on.pdf",
-    "dataName": "17. Put Another Log on"
+    "dataName": "17. Put Another Log on",
+    "speed": 60,
+    "zoom": 3.50
   },
   {
     "id": "song-18",
@@ -189,9 +207,9 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/18-Pretty-Girl-.pdf",
     "dataName": "18. Pretty Girl",
-     "chords": ["b7","fs"],
-    "speed": 17,
-    "zoom": 2.20
+    "chords": ["b7","fs"],
+    "speed": 82,
+    "zoom": 2.95
   },
   {
     "id": "song-19",
@@ -202,8 +220,8 @@ const songsData = [
     "pdf": "pdfs/19-Shes-a-Mod.pdf",
     "dataName": "19. Shes a Mod",
     "chords": [""],
-    "speed": 17,
-    "zoom": 2.20
+    "speed": 67,
+    "zoom": 3.50
   },
   {
     "id": "song-20",
@@ -223,8 +241,8 @@ const songsData = [
     "pdf": "pdfs/21-Slice-of-Heaven.pdf",
     "dataName": "21. Slice of Heaven",
     "chords": [""],
-    "speed": 17,
-    "zoom": 2.20
+    "speed": 67,
+    "zoom": 3.50
   },
   {
     "id": "song-22",
@@ -235,8 +253,8 @@ const songsData = [
     "pdf": "pdfs/22-Tea-at-Te-Kuiti.pdf",
     "dataName": "22. Tea at Te Kuiti",
     "chords": [""],
-    "speed": 17,
-    "zoom": 2.20
+    "speed": 37,
+    "zoom": 3.40
   },
   {
     "id": "song-23",
@@ -247,8 +265,8 @@ const songsData = [
     "pdf": "pdfs/23-The-Gumboot-Song.pdf",
     "dataName": "23. The Gumboot Song",
     "chords": [""],
-    "speed": 17,
-    "zoom": 2.20
+    "speed": 37,
+    "zoom": 3.40
   },
   {
     "id": "song-24",
@@ -257,7 +275,9 @@ const songsData = [
     "artist": "NA",
     "genre": "NA",
     "pdf": "pdfs/24-Tumblin-Down.pdf",
-    "dataName": "24. Tumblin Down"
+    "dataName": "24. Tumblin Down",
+    "speed": 57,
+    "zoom": 3.50
   },
   {
     "id": "song-25",
@@ -267,8 +287,8 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/25-Tutira-Mai-Nga-Iwi.pdf",
     "dataName": "25. Tutira Mai Nga Iwi",
-    "speed": 17,
-    "zoom": 2.20,
+    "speed": 57,
+    "zoom": 3.50,
     "scenes": [
     {
       "at": 0.8,     
@@ -285,7 +305,9 @@ const songsData = [
     "artist": "NA",
     "genre": "NA",
     "pdf": "pdfs/26-Hine-e-Hine.pdf",
-    "dataName": "26. Hine e Hine"
+    "dataName": "26. Hine e Hine",
+    "speed": 57,
+    "zoom": 3.50
   },
   {
     "id": "song-27",
