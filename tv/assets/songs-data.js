@@ -28,7 +28,7 @@ const songsData = [
     "pdf": "pdfs/2-Aunty-Alice.pdf",
     "dataName": "2. Aunty Alice",
     "chords": [""],
-    "speed": 27,
+    "speed": 77,
     "zoom": 3.50
   },
   {
@@ -40,7 +40,7 @@ const songsData = [
     "pdf": "pdfs/3-April-Sun-In-Cuba.pdf",
     "dataName": "3. April Sun In Cuba",
     "chords": ["a","asus4","bm","gmaj7"],
-    "speed": 27,
+    "speed": 92,
     "zoom": 3.50
   },
   {
@@ -52,7 +52,7 @@ const songsData = [
     "pdf": "pdfs/4-Cheryl-Moana-Marie.pdf",
     "dataName": "4. Cheryl Moana Marie",
     "chords": [""],
-    "speed": 17,
+    "speed": 27,
     "zoom": 3.50
   },
   {
@@ -64,7 +64,7 @@ const songsData = [
     "pdf": "pdfs/5-Damn-The-Dam.pdf",
     "dataName": "5. Damn The Dam",
     "chords": ["bm","b7"],
-    "speed": 17,
+    "speed": 62,
     "zoom": 3.25
   },
   {
@@ -76,6 +76,7 @@ const songsData = [
     "pdf": "pdfs/6-Dance-All-Around-The-World.pdf",
     "dataName": "6. Dance All Around The World",
      "chords": ["bm","fs"],
+     "speed": 67,
      "zoom": 3.25
   },
   {
@@ -86,6 +87,7 @@ const songsData = [
     "genre": "NA",
     "pdf": "pdfs/7-Do-The-Blue-Beat.pdf",
     "dataName": "7. Do The Blue Beat",
+    "speed": 67,
     "zoom": 3.50
   },
   {
