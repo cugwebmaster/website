@@ -28,8 +28,8 @@ const songsData = [
     "pdf": "pdfs/2-Aunty-Alice.pdf",
     "dataName": "2. Aunty Alice",
     "chords": [""],
-    "speed": 77,
-    "zoom": 3.50
+    "speed": 42,
+    "zoom": 3.60
   },
   {
     "id": "song-3",
